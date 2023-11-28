@@ -12,11 +12,12 @@
   loop: "{{ users__users }}"
 
 # TODO: Disable old keys.
+# See https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_filters.html#combining-objects-and-subelements
 - name: Ensure authorized SSH keys
   become: true
   ansible.posix.authorized_key:
-    user: "{{ item.name }}"
     state: present
-    comment: "{{ item.sshkeypub.split()[1:] | join(' ') }}"  # Remove the first word
-    key: "{{ item.sshkeytype }} {{ item.sshkeypub }}"
-  loop: "{{ users__users }}"
+    user: "{{ item.0.name }}"
+    key: "{{ item.1.type }} {{ item.1.public_key }}"
+    comment: "{{ item.1.public_key.split()[1:] | join(' ') }}"  # Remove the first word
+  loop: "{{ users__users | subelements('authorized_ssh_keys') }}"

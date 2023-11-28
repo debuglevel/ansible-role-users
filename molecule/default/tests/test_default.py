@@ -57,7 +57,7 @@ def test_authorized_keys(host):
     print(f.content)
     assert f.exists
     assert f.contains("ssh-ed25519 ABCDEFG comment text")
-    assert not f.contains("some additional text")
+    assert f.contains("ssh-rsa HIJKLMN comment text")
 
 # def test_directories(host):
 #     """Validate service directories exists."""
