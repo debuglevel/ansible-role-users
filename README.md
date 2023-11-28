@@ -2,8 +2,9 @@ Users Role
 =========
 
 * Creates users:
+  * Creates a group with the user's name and the defined GID.
   * Sets password.
-  * Sets UID and GID.
+  * Sets UID.
   * Sets groups.
   * Sets authorized SSH keys.
 

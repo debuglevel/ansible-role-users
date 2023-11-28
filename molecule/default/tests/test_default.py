@@ -20,18 +20,18 @@ def test_updated(host):
         assert file.exists
         assert (now - file.mtime).total_seconds() < 600
 
-# def test_groups(host):
-#     """Validate group in /etc/group"""
+def test_groups(host):
+    """Validate group in /etc/group"""
 
-#     f = host.file("/etc/group")
-#     #print(f.content)
-#     assert f.contains("testgroup:x:")
-#     assert f.contains(":1138:")
-#     assert f.contains(":testuser")
-#     #assert f.contains("testgroup:x:1138:testuser")  # the users' main group is not in /etc/group
-#     assert f.contains("testgroup:x:1138:")
-#     assert f.contains("audio:.*testuser")
-#     assert f.contains("games:.*testuser")
+    f = host.file("/etc/group")
+    #print(f.content)
+    assert f.contains("testuser:x:")
+    assert f.contains(":1138:")
+    assert f.contains(":testuser")
+    #assert f.contains("testuser:x:1138:testuser")  # the users' main group is not in /etc/group
+    assert f.contains("testuser:x:1138:")
+    assert f.contains("audio:.*testuser")
+    assert f.contains("games:.*testuser")
 
 def test_users(host):
     """Validate user in /etc/passwd"""
@@ -39,10 +39,10 @@ def test_users(host):
     f = host.file("/etc/passwd")
     assert f.contains("testuser:x:")
     assert f.contains(":4711:")
-    assert f.contains(":10:")
+    assert f.contains(":1138:")
     assert f.contains(":/home/testuser:")
     assert f.contains(":/bin/bash")
-    assert f.contains("testuser:x:4711:10:.*:/home/testuser:/bin/bash")
+    assert f.contains("testuser:x:4711:1138:.*:/home/testuser:/bin/bash")
 
 def test_shadow(host):
     """Validate user in /etc/shadow"""

@@ -1,14 +1,22 @@
 ---
+- name: Ensure user group
+  become: true
+  ansible.builtin.group:
+    state: present
+    name: "{{ item.name }}"
+    gid: "{{ item.gid }}"
+  loop: "{{ users__users }}"
+
 - name: Ensure user
   become: true
   ansible.builtin.user:
+    state: present
     name: "{{ item.name }}"
     uid: "{{ item.uid }}"
     group: "{{ item.gid }}"
     groups: "{{ item.groups }}"
     append: true
     shell: /bin/bash
-    state: present
   loop: "{{ users__users }}"
 
 # TODO: Disable old keys.
