@@ -2,6 +2,9 @@
 - name: Converge
   hosts: all
   tasks:
+    - name: Include vars
+      ansible.builtin.include_vars: vars.yml
+      
     - name: "Include debuglevel.template"
       ansible.builtin.include_role:
         name: "debuglevel.template"

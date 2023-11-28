@@ -1,5 +1,12 @@
-Role Name
+Users Role
 =========
+
+* Creates users:
+  * Sets password.
+  * Sets UID and GID.
+  * Sets groups.
+  * Sets authorized SSH keys.
+
 
 <!-- A brief description of the role goes here. -->
 
@@ -12,6 +19,19 @@ Role Variables
 --------------
 
 <!-- A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well. -->
+
+```
+users__users:
+  - name: testuser
+    sshkeypub: ABCDEFG comment text
+    sshkeytype: ssh-ed25519
+    password: $6$IwHRq.vM$MJHTlcyDSZ12XAQLSx7KNxfklIGpTi7JtZw8wqdGA0Xq06U4qXmD8AxnJiLfEO2O/3Dn9zlDC/BOER6/F6S7n/  # `mkpasswd -m sha-512 -s`  
+    uid: 4711
+    gid: 1138  # Seems to also accepts a GID even though docs state "groupname"
+    groups:  # Seems to also accepts a list even though docs state "foo,bar"
+      - audio
+      - games
+```
 
 Dependencies
 ------------
@@ -42,8 +62,8 @@ Using
 
 ```
 roles:
-  - name: debuglevel.template
-    src: https://github.com/debuglevel/ansible-role-template
+  - name: debuglevel.users
+    src: https://github.com/debuglevel/ansible-role-users
     version: <commit hash>
 ```
 
