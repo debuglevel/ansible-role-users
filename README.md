@@ -26,7 +26,7 @@ users__users:
   - name: testuser
     password: $6$IwHRq.vM$MJHTlcyDSZ12XAQLSx7KNxfklIGpTi7JtZw8wqdGA0Xq06U4qXmD8AxnJiLfEO2O/3Dn9zlDC/BOER6/F6S7n/  # `mkpasswd -m sha-512 -s`  
     uid: 4711
-    gid: 10  # Seems to also accepts a GID even though docs state "groupname"
+    gid: 1138  # Seems to also accepts a GID even though docs state "groupname"
     groups:  # Seems to also accepts a list even though docs state "foo,bar"
       - audio
       - games
